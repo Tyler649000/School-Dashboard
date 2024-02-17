@@ -1,0 +1,346 @@
+:root {
+    --clr-primary: #077;
+    --clr-white: #bbb;
+    --clr-black: #1c1c1c;
+    --clr-add: #0d0;
+    --clr-edit: #dd0;
+    --clr-remove: #d00;
+
+    --ff-primary: Roboto, sans-serif;
+    --ff-secondary: Futura, serif;
+}
+
+::-webkit-scrollbar {display: none}
+
+body {
+    background: #000;
+    display: flex;
+    justify-content: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    color: var(--clr-white);
+    font-family: var(--ff-secondary);
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    gap: 0.1rem;
+    z-index: 1;
+
+    @media (min-width: 65rem) {
+        display: none;
+    }
+
+    >button {
+        flex: 1;
+        border: none;
+        background: #5555;
+        font-size: 1.2rem;
+    }
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    height: 100vh;
+}
+
+.page {
+    display: none;
+    width: 20rem;
+    background: var(--clr-black);
+    position: relative;
+
+    >h1 {
+        font-size: 2.5rem;
+        font-family: var(--ff-secondary);
+        text-align: center;
+    }
+
+    &[data-selected="true"] {
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (min-width: 65rem) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.page:not(#links) > h1 {
+    position: absolute;
+    width: 100%;
+    padding-bottom: 2rem;
+    background: linear-gradient(var(--clr-black), color-mix(in oklab, var(--clr-black) 80%, #0000) 80%, #0000);
+    backdrop-filter: blur(0.05rem);
+}
+
+#add-reminder,
+#add-homework {
+    --clr-primary: var(--clr-add);
+}
+
+#edit-reminder,
+#edit-homework {
+    --clr-primary: var(--clr-edit);
+}
+
+#remove-reminder,
+#remove-homework {
+    --clr-primary: var(--clr-remove);
+}
+
+#reminder-controls,
+#homework-controls {
+    display: flex;
+    justify-content: space-evenly;
+
+    >button {
+        border: none;
+        border-radius: 0.5em;
+        background: #555f;
+        color: var(--clr-primary);
+        font-size: 1.1rem;
+        padding-inline: 0.75em;
+        padding-block: 0.1em;
+        cursor: pointer;
+        font-weight: bolder;
+        transition: 200ms;
+        cursor: pointer;
+
+        &[data-selected="true"] {
+            background: var(--clr-primary);
+            color: #0007;
+        }
+    }
+}
+
+.reminder {
+    >h1,
+    >h1 span {
+        font-size: 0.9rem;
+        color: var(--clr-primary);
+        font-weight: bolder;
+        padding-block: 0.1rem;
+    }
+
+    >p {
+        font-family: var(--ff-secondary);
+    }
+
+    :first-child {
+        white-space: nowrap;
+    }
+}
+
+.homework,
+.reminder {
+    display: block;
+    font-size: 1.3rem;
+    border-left: 0.2rem solid var(--clr-primary);
+    padding: 0.3rem;
+    max-width: 100%;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    transition: 250ms;
+    position: relative;
+
+    &:not(:first-child) {
+        box-shadow: inset 0 0.15rem #fff1;
+    }
+
+    &:has([contenteditable="true"]),
+    &[contenteditable="true"] {
+        --clr-primary: var(--clr-edit);
+        background: color-mix(in oklab, var(--clr-primary) 10%, #0000);
+
+        >h1 span {
+            display: none;
+        }
+    }
+
+    &[data-deleting="true"] {
+        --clr-primary: var(--clr-remove);
+        background: color-mix(in oklab, var(--clr-primary) 10%, #0000);
+        cursor: pointer;
+    }
+
+    &.dragging {
+        opacity: 0.1;
+    }
+
+    :first-child {
+        transform-origin: top;
+        transform: scale(1);
+        transition: 250ms;
+    }
+
+    .days-until-date {
+        transform-origin: bottom;
+        position: absolute;
+        inset: 0.3rem;
+        height: min-content;
+        transform: scale(1, 0);
+        transition: 250ms;
+    }
+
+    &.hovering {
+        :first-child {
+            transform: scale(1, 0);
+        }
+        .days-until-date {
+            transform: scale(1);
+        }
+    }
+
+    &.subheading {
+        background: var(--clr-primary);
+        font-size: 0.9rem;
+        font-weight: bolder;
+        box-shadow: none;
+        border-radius: 0.5rem;
+
+        p {
+            color: var(--clr-white);
+        }
+        
+        &:has(+.homework:not(.subheading)) {
+            border-radius: 0.5rem 0.5rem 0.5rem 0;
+        }
+        
+        &:not(:first-child) {
+            margin-top: 0.3rem;
+        }
+
+        +.homework {
+            box-shadow: none;
+        }
+    }
+}
+
+#links {
+    >h2 {
+        margin-left: 0.4rem;
+        font-size: 1.7rem;
+    }
+
+    >a {
+        font-size: 1.3rem;
+        color: var(--clr-primary);
+        text-decoration: none;
+        display: block;
+        margin-left: 1em;
+        width: max-content;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            background: var(--clr-primary);
+            position: absolute;
+            inset: calc(100% - 0.15em) 100% 0 -100%;
+            opacity: 0;
+            transition: 0ms 200ms,
+            opacity 200ms;
+        }
+    }
+}
+
+#links > a:hover::after {
+    opacity: 1;
+    inset: calc(100% - 0.15em) 0 0 0;
+    transition: 500ms ease-out;
+}
+
+#homework #homework-adder,
+#reminders #reminder-adder {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 1;
+
+    ::placeholder {
+       color: #0005; 
+    }
+
+    >div {
+        background: #333c;
+        backdrop-filter: blur(0.1rem);
+        display: grid;
+        pointer-events: all;
+        padding: 2rem;
+        border-radius: 2rem;
+        gap: 1rem;
+        justify-items: center;
+        text-wrap: wrap;
+
+        #add-reminder-content,
+        #add-reminder-date,
+        #add-homework-content {
+            color: var(--clr-black);
+            padding: 0.2rem 0.5rem;
+            border: 0.2rem solid var(--clr-white);
+            border-radius: 0.5rem;
+
+            &[data-invalid-input='true'] {
+                background: color-mix(in oklab, var(--clr-remove) 30%, #fff);
+                color: var(--clr-remove);
+                border-color: var(--clr-remove);
+            }
+        }
+
+        >div {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        #subheading {
+                width: 0.75rem;
+
+            +label {
+                font-size: 0.75rem;
+            }
+        }
+
+        #add-reminder-confirm,
+        #add-homework-confirm {
+            color: var(--clr-black);
+            width: min-content;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1em;
+            border: solid #0005 0.2em;
+            cursor: pointer;
+            transition: 100ms;
+
+            &:hover {
+                background: var(--clr-add);
+            }
+        }
+    }
+}
+
+#reminders-container,
+#homework-container {
+    overflow-y: scroll;
+    padding-top: 7rem;
+}
+
+#accent-color {
+    position: absolute;
+    inset: auto 0.5rem 0.5rem auto;
+    width: 1.5rem;
+    background: none;
+    border: none;
+}

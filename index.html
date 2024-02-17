@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tyler Langley</title>
+        <link rel="icon" href="assets/pfp.png">
+        <link rel="stylesheet" href="style.css">
+        <script src="nav.js" defer></script>
+        <script src="reminders.js" defer></script>
+        <script src="homework.js" defer></script>
+        <script src="drag-and-drop.js" defer></script>
+        <script src="accent-color.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <button type="button" class="previous" onclick="navTo('previous')">previous</button>
+            <button type="button" class="next" onclick="navTo('next')">next</button>
+        </header>
+        <main>
+            <section id="reminders" class="page" data-selected="true">
+                <h1>
+                    Reminders
+                    <div id="reminder-controls">
+                        <button type="button" id="add-reminder">ADD</button>
+                        <button type="button" id="edit-reminder">EDIT</button>
+                        <button type="button" id="remove-reminder">REMOVE</button>
+                    </div>
+                </h1>
+                <div id="reminder-adder">
+                    <div>
+                        <input type="text" name="reminder-date" id="add-reminder-date" placeholder="Date..." autocomplete="off">
+                        <input type="text" name="reminder-content" id="add-reminder-content" placeholder="Reminder..." autocomplete="off">
+                        <button type="button" id="add-reminder-confirm" onclick="addReminder(this.parentNode.firstElementChild.value, this.parentNode.children[1].value)">Confirm</button>
+                    </div>
+                </div>
+                <div id="reminders-container"></div>
+            </section>
+            <section id="homework" class="page">
+                <h1>
+                    Homework
+                    <div id="homework-controls">
+                        <button type="button" id="add-homework">ADD</button>
+                        <button type="button" id="edit-homework">EDIT</button>
+                        <button type="button" id="remove-homework">REMOVE</button>
+                    </div>
+                </h1>
+                <div id="homework-adder">
+                    <div>
+                        <input type="text" name="homework-content" id="add-homework-content" placeholder="Homework..." autocomplete="off">
+                        <div>
+                            <input type="checkbox" name="subheading" id="subheading">
+                            <label for="subheading">Subheading</label>
+                        </div>
+                        <button type="button" id="add-homework-confirm" onclick="addHomework(this.parentNode.querySelector('#add-homework-content').value, this.parentNode.querySelector('#subheading').checked)">Confirm</button>
+                    </div>
+                </div>
+                <div id="homework-container"></div>
+            </section>
+            <section id="links" class="page">
+                <h1>Links</h1>
+                <h2>School</h2>
+                <a href="https://nndsb.elearningontario.ca/d2l/home" target="_blank">LMS</a>
+                <a href="https://nndsb.edsby.com/p/BaseStudent/" target="_blank">Edsby</a>
+                <a href="https://www.nearnorthschools.ca/" target="_blank">NNDSB</a>
+                <a href="https://outlook.office.com/mail/" target="_blank">Mail</a>
+                <a href="https://mynndsb.nearnorthschools.ca/register/user/login" target="_blank">Sign in</a>
+                <h2>Translation</h2>
+                <a href="https://www.wordreference.com/" target="_blank">WordReference</a>
+                <a href="https://bonpatron.com/en/" target="_blank">BonPatron</a>
+                <a href="https://www.google.com/search?q=Google+Translate" target="_blank">Google Translate</a>
+                <h2>YouTube</h2>
+                <a href="https://music.youtube.com/playlist?list=LM" target="_blank">Music</a>
+                <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+                <a href="https://en1.y2mate.is/q6rli/" target="_blank">Download</a>
+                <h2>Other</h2>
+                <a href="https://pixabay.com/" target="_blank">Pixabay</a>
+            </section>
+        </main>
+        <input type="color" name="accent-color" id="accent-color">
+    </body>
+</html>
