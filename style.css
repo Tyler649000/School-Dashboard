@@ -5,6 +5,9 @@
     --clr-add: #0d0;
     --clr-edit: #dd0;
     --clr-remove: #d00;
+    /* --clr-add: color-mix(in oklab, #fff, var(--clr-primary) 70%);
+    --clr-edit: var(--clr-primary);
+    --clr-remove: color-mix(in oklab, #000, var(--clr-primary) 70%); */
 
     --ff-primary: Roboto, sans-serif;
     --ff-secondary: Futura, serif;
@@ -77,6 +80,7 @@ main {
 
 .page:not(#links) > h1 {
     position: absolute;
+    z-index: 1;
     width: 100%;
     padding-bottom: 2rem;
     background: linear-gradient(var(--clr-black), color-mix(in oklab, var(--clr-black) 80%, #0000) 80%, #0000);

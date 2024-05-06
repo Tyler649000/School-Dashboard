@@ -8,7 +8,7 @@ let accentColor = localStorage.getItem('accent-color');
 if (!accentColor) accentColor = '#007777';
 document.querySelector('#accent-color').addEventListener('input', () => changeAccentColor(document.querySelector('#accent-color').value))
 document.querySelector('#accent-color').value = accentColor;
-changeAccentColor(accentColor)
+changeAccentColor(accentColor);
 
 function getBrightness(hex) {
     const r = parseInt(hex[1] + hex[2], 16);
