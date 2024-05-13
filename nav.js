@@ -23,6 +23,24 @@ const addReminderButton = document.querySelector('#reminder-controls #add-remind
 const editReminderButton = document.querySelector('#reminder-controls #edit-reminder');
 const removeReminderButton = document.querySelector('#reminder-controls #remove-reminder');
 
+function changeVisibility() {
+    if (document.getElementsByClassName('reminder').length) {
+        editReminderButton.style.display = '';
+        removeReminderButton.style.display = '';
+    } else {
+        editReminderButton.style.display = 'none';
+        removeReminderButton.style.display = 'none';
+    }
+
+    if (document.getElementsByClassName('homework').length) {
+        editHomeworkButton.style.display = '';
+        removeHomeworkButton.style.display = '';
+    } else {
+        editHomeworkButton.style.display = 'none';
+        removeHomeworkButton.style.display = 'none';
+    }
+}
+
 function disableAllButtons(buttonClicked) {
     if (buttonClicked != addHomeworkButton && addHomeworkButton.dataset.selected == 'true') addHomeworkButton.dispatchEvent(new Event('click'));
     if (buttonClicked != editHomeworkButton && editHomeworkButton.dataset.selected == 'true') editHomeworkButton.dispatchEvent(new Event('click'));
@@ -30,6 +48,7 @@ function disableAllButtons(buttonClicked) {
     if (buttonClicked != addReminderButton && addReminderButton.dataset.selected == 'true') addReminderButton.dispatchEvent(new Event('click'));
     if (buttonClicked != editReminderButton && editReminderButton.dataset.selected == 'true') editReminderButton.dispatchEvent(new Event('click'));
     if (buttonClicked != removeReminderButton && removeReminderButton.dataset.selected == 'true') removeReminderButton.dispatchEvent(new Event('click'));
+    changeVisibility();
 }
 
 // reminder buttons
@@ -90,9 +109,17 @@ removeReminderButton.addEventListener('click', () => {
 
 // homework buttons
 
+function updateDraggable() {
+    if (addHomeworkButton.dataset.selected == 'false' && editHomeworkButton.dataset.selected == 'false' && removeHomeworkButton.dataset.selected == 'false') {
+        for (const element of document.getElementsByClassName('homework')) {element.setAttribute('draggable', 'true')}
+    } else {
+        for (const element of document.getElementsByClassName('homework')) {element.setAttribute('draggable', 'false')}
+    }
+}
+
 addHomeworkButton.addEventListener('click', () => {
     disableAllButtons(addHomeworkButton);
-
+    
     const homeworkAdder = document.querySelector('#homework-adder');
     if (addHomeworkButton.dataset.selected == 'true') {
         addHomeworkButton.dataset.selected = 'false';
@@ -105,11 +132,12 @@ addHomeworkButton.addEventListener('click', () => {
         homeworkAdder.style.display = 'grid';
         document.querySelector('#add-homework-content').focus();
     }
+    updateDraggable();
 })
 
 editHomeworkButton.addEventListener('click', () => {
     disableAllButtons(editHomeworkButton);
-
+    
     if (editHomeworkButton.dataset.selected == 'true') {
         editHomeworkButton.dataset.selected = 'false';
         homework = [];
@@ -125,11 +153,12 @@ editHomeworkButton.addEventListener('click', () => {
             element.setAttribute('contenteditable', 'true');
         }
     }
+    updateDraggable();
 })
 
 removeHomeworkButton.addEventListener('click', () => {
     disableAllButtons(removeHomeworkButton);
-
+    
     if (removeHomeworkButton.dataset.selected == 'true') {
         removeHomeworkButton.dataset.selected = 'false';
         for (const element of document.getElementsByClassName('homework')) {element.dataset.deleting = 'false'};
@@ -137,4 +166,5 @@ removeHomeworkButton.addEventListener('click', () => {
         removeHomeworkButton.dataset.selected = 'true';
         for (const element of document.getElementsByClassName('homework')) {element.dataset.deleting = 'true'};
     }
+    updateDraggable();
 })

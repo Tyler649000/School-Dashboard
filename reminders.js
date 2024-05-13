@@ -67,6 +67,8 @@ const loadReminders = () => {
         reminderContainer.addEventListener('mouseleave', () => reminderContainer.classList.remove('hovering'));
         document.getElementById('reminders-container').appendChild(reminderContainer);
     })
+    
+    changeVisibility();
 }
 loadReminders();
 

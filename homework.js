@@ -41,6 +41,8 @@ const loadHomework = () => {
         document.getElementById('homework-container').appendChild(homeworkContainer);
     })
     document.querySelector('#accent-color').dispatchEvent(new Event('input'));
+    
+    changeVisibility();
 }
 loadHomework();
 

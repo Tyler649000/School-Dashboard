@@ -106,19 +106,21 @@ main {
 #homework-controls {
     display: flex;
     justify-content: space-evenly;
-
+    gap: 0.5rem;
+    margin-inline: 0.5rem;
+    
     >button {
         border: none;
         border-radius: 0.5em;
         background: #555f;
         color: var(--clr-primary);
         font-size: 1.1rem;
-        padding-inline: 0.75em;
         padding-block: 0.1em;
         cursor: pointer;
         font-weight: bolder;
-        transition: 200ms;
         cursor: pointer;
+        flex-grow: 1;
+        transition: 200ms;
 
         &[data-selected="true"] {
             background: var(--clr-primary);
