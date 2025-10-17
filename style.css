@@ -2,12 +2,6 @@
     --clr-primary: #077;
     --clr-white: #bbb;
     --clr-black: #1c1c1c;
-    /* --clr-add: #0d0;
-    --clr-edit: #dd0;
-    --clr-remove: #d00; */
-    --clr-add: color-mix(in oklab, #fff, var(--clr-primary) 70%);
-    --clr-edit: var(--clr-primary);
-    --clr-remove: color-mix(in oklab, #000, var(--clr-primary) 70%);
 
     --ff-primary: Roboto, sans-serif;
     --ff-secondary: Futura, serif;
@@ -87,21 +81,6 @@ main {
     backdrop-filter: blur(0.05rem);
 }
 
-#add-reminder,
-#add-homework {
-    --clr-primary: var(--clr-add);
-}
-
-#edit-reminder,
-#edit-homework {
-    --clr-primary: var(--clr-edit);
-}
-
-#remove-reminder,
-#remove-homework {
-    --clr-primary: var(--clr-remove);
-}
-
 #reminder-controls,
 #homework-controls {
     display: flex;
@@ -165,7 +144,7 @@ main {
 
     &:has([contenteditable="true"]),
     &[contenteditable="true"] {
-        --clr-primary: var(--clr-edit);
+        --clr-primary: #ff0;
         background: color-mix(in oklab, var(--clr-primary) 10%, #0000);
 
         >h1 span {
@@ -174,7 +153,7 @@ main {
     }
 
     &[data-deleting="true"] {
-        --clr-primary: var(--clr-remove);
+        --clr-primary: #f00;
         background: color-mix(in oklab, var(--clr-primary) 10%, #0000);
         cursor: pointer;
     }
@@ -278,7 +257,7 @@ main {
     z-index: 1;
 
     ::placeholder {
-       color: #0005; 
+       color: #0005;
     }
 
     >div {
@@ -331,7 +310,7 @@ main {
             transition: 100ms;
 
             &:hover {
-                background: var(--clr-add);
+                background: #0f0;
             }
         }
     }
