@@ -239,6 +239,10 @@ main {
 }
 
 #links-container {
+    &:first-child {
+        padding-top: 0;
+    }
+    
     >h2 {
         margin-left: 0.4rem;
         font-size: 1.7rem;
