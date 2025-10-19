@@ -239,7 +239,7 @@ main {
 }
 
 #links-container {
-    &:first-child {
+    :first-child {
         padding-top: 0;
     }
     
