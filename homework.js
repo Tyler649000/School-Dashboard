@@ -47,7 +47,8 @@ const loadHomework = () => {
         if (item.subheading) homeworkContainer.classList.add('subheading');
         document.getElementById('homework-container').appendChild(homeworkContainer);
     })
-    
+
+    document.getElementById('accent-color').dispatchEvent(new Event('input'));
     changeVisibility();
 }
 loadHomework();
