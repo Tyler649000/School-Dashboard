@@ -19,7 +19,7 @@ let links = [
 
 const addLink = (title, url) => {
     if (!title) {
-        document.querySelector('#links-adder #add-link-title').dataset.invalidInput = 'true';
+        document.querySelector('#link-adder #add-link-title').dataset.invalidInput = 'true';
         return;
     }
     
