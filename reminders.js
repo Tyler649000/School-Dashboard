@@ -40,7 +40,7 @@ const loadReminders = () => {
         : `${Math.abs(daysUntilDate)} DAYS AGO`;
 
         const dayContainer = document.createElement('span');
-        dayContainer.innerHTML = ` - ${day}`;
+        dayContainer.innerHTML = ` -- ${day}`;
         const dateContainer = document.createElement('h1');
         dateContainer.innerHTML = date;
         dateContainer.appendChild(dayContainer);
@@ -81,6 +81,7 @@ const saveReminders = () => {
     localStorage.setItem('reminders',JSON.stringify(reminders));
     loadReminders();
 }
+saveReminders()
 
 const removeReminder = (element) => {
     const reminderElements = [];

@@ -21,6 +21,7 @@ const loadHomework = () => {
         const homeworkContainer = document.createElement('span');
         homeworkContainer.classList.add('homework');
         homeworkContainer.appendChild(homeworkContent);
+        
         homeworkContainer.addEventListener('click', () => {
             if (homeworkContainer.dataset.deleting == 'true') {
                 removeHomework(homeworkContainer);
@@ -28,7 +29,12 @@ const loadHomework = () => {
                 removeHomeworkButton.dispatchEvent(new Event('click'));
             }
         })
-        homeworkContainer.addEventListener('dragstart', () => homeworkContainer.classList.add('dragging'));
+
+        homeworkContainer.addEventListener('dragstart', (event) => {
+            homeworkContainer.classList.add('dragging');
+            event.dataTransfer.effectAllowed = "move";
+        });
+
         homeworkContainer.addEventListener('dragend', () => {
             homeworkContainer.classList.remove('dragging');
             setTimeout(() => {
@@ -36,11 +42,11 @@ const loadHomework = () => {
                 editHomeworkButton.dispatchEvent(new Event('click'));
             }, 250)
         });
+
         homeworkContainer.draggable = 'true';
         if (item.subheading) homeworkContainer.classList.add('subheading');
         document.getElementById('homework-container').appendChild(homeworkContainer);
     })
-    document.querySelector('#accent-color').dispatchEvent(new Event('input'));
     
     changeVisibility();
 }

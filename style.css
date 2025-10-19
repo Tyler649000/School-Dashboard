@@ -72,17 +72,18 @@ main {
     }
 }
 
-.page:not(#links) > h1 {
+.page > h1 {
     position: absolute;
     z-index: 1;
     width: 100%;
-    padding-bottom: 2rem;
+    padding-bottom: 1.1rem;
     background: linear-gradient(var(--clr-black), color-mix(in oklab, var(--clr-black) 80%, #0000) 80%, #0000);
     backdrop-filter: blur(0.05rem);
 }
 
 #reminder-controls,
-#homework-controls {
+#homework-controls,
+#link-controls {
     display: flex;
     justify-content: space-evenly;
     gap: 0.5rem;
@@ -94,7 +95,6 @@ main {
         background: #555f;
         color: var(--clr-primary);
         font-size: 1.1rem;
-        padding-block: 0.1em;
         cursor: pointer;
         font-weight: bolder;
         cursor: pointer;
@@ -102,8 +102,25 @@ main {
         transition: 200ms;
 
         &[data-selected="true"] {
-            background: var(--clr-primary);
             color: #0007;
+
+            &#add-reminder,
+            &#add-homework,
+            &#add-link {
+                background: #0f0;
+            }
+
+            &#edit-reminder,
+            &#edit-homework,
+            &#edit-link {
+                background: #ff0;
+            }
+
+            &#remove-reminder,
+            &#remove-homework,
+            &#remove-link {
+                background: #f00;
+            }
         }
     }
 }
@@ -127,10 +144,10 @@ main {
 }
 
 .homework,
-.reminder {
+.reminder,
+.link {
     display: block;
     font-size: 1.3rem;
-    border-left: 0.2rem solid var(--clr-primary);
     padding: 0.3rem;
     max-width: 100%;
     hyphens: auto;
@@ -138,12 +155,21 @@ main {
     transition: 250ms;
     position: relative;
 
-    &:not(:first-child) {
+    &:not(h2.link) {
+        border-left: 0.2rem solid var(--clr-primary);
+    }
+
+    &:not(:first-child):not(.link) {
         box-shadow: inset 0 0.15rem #fff1;
     }
 
+    &[draggable="true"] {
+        cursor: grab;
+    }
+
     &:has([contenteditable="true"]),
-    &[contenteditable="true"] {
+    &[contenteditable="true"],
+    &.link[draggable="true"] {
         --clr-primary: #ff0;
         background: color-mix(in oklab, var(--clr-primary) 10%, #0000);
 
@@ -160,6 +186,7 @@ main {
 
     &.dragging {
         opacity: 0.1;
+        cursor: grabbing !important;
     }
 
     :first-child {
@@ -211,7 +238,7 @@ main {
     }
 }
 
-#links {
+#links-container {
     >h2 {
         margin-left: 0.4rem;
         font-size: 1.7rem;
@@ -225,7 +252,6 @@ main {
         margin-left: 1em;
         width: max-content;
         position: relative;
-        z-index: 1;
         overflow: hidden;
 
         &::after {
@@ -240,14 +266,15 @@ main {
     }
 }
 
-#links > a:hover::after {
+#links-container > a:hover::after {
     opacity: 1;
     inset: calc(100% - 0.15em) 0 0 0;
     transition: 500ms ease-out;
 }
 
-#homework #homework-adder,
-#reminders #reminder-adder {
+#homework-adder,
+#reminder-adder,
+#link-adder {
     position: fixed;
     inset: 0;
     display: none;
@@ -273,16 +300,18 @@ main {
 
         #add-reminder-content,
         #add-reminder-date,
-        #add-homework-content {
+        #add-homework-content,
+        #add-link-title,
+        #add-link-url {
             color: var(--clr-black);
             padding: 0.2rem 0.5rem;
             border: 0.2rem solid var(--clr-white);
             border-radius: 0.5rem;
 
             &[data-invalid-input='true'] {
-                background: color-mix(in oklab, var(--clr-remove) 30%, #fff);
-                color: var(--clr-remove);
-                border-color: var(--clr-remove);
+                background: color-mix(in oklab, #f00 30%, #fff);
+                color: #f00;
+                border-color: #f00;
             }
         }
 
@@ -300,7 +329,8 @@ main {
         }
 
         #add-reminder-confirm,
-        #add-homework-confirm {
+        #add-homework-confirm,
+        #add-link-confirm {
             color: var(--clr-black);
             width: min-content;
             padding: 0.2rem 0.5rem;
@@ -317,9 +347,10 @@ main {
 }
 
 #reminders-container,
-#homework-container {
+#homework-container,
+#links-container {
     overflow-y: scroll;
-    padding-top: 7rem;
+    padding-top: 6rem;
 }
 
 #accent-color {

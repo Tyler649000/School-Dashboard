@@ -22,6 +22,9 @@ const removeHomeworkButton = document.querySelector('#homework-controls #remove-
 const addReminderButton = document.querySelector('#reminder-controls #add-reminder');
 const editReminderButton = document.querySelector('#reminder-controls #edit-reminder');
 const removeReminderButton = document.querySelector('#reminder-controls #remove-reminder');
+const addLinkButton = document.querySelector('#link-controls #add-link');
+const editLinkButton = document.querySelector('#link-controls #edit-link');
+const removeLinkButton = document.querySelector('#link-controls #remove-link');
 
 function changeVisibility() {
     if (document.getElementsByClassName('reminder').length) {
@@ -39,15 +42,26 @@ function changeVisibility() {
         editHomeworkButton.style.display = 'none';
         removeHomeworkButton.style.display = 'none';
     }
+
+    if (document.querySelector('#links a') || document.querySelector('#links h2')) {
+        editLinkButton.style.display = '';
+        removeLinkButton.style.display = '';
+    } else {
+        editLinkButton.style.display = 'none';
+        removeLinkButton.style.display = 'none';
+    }
 }
 
 function disableAllButtons(buttonClicked) {
-    if (buttonClicked != addHomeworkButton && addHomeworkButton.dataset.selected == 'true') addHomeworkButton.dispatchEvent(new Event('click'));
-    if (buttonClicked != editHomeworkButton && editHomeworkButton.dataset.selected == 'true') editHomeworkButton.dispatchEvent(new Event('click'));
-    if (buttonClicked != removeHomeworkButton && removeHomeworkButton.dataset.selected == 'true') removeHomeworkButton.dispatchEvent(new Event('click'));
     if (buttonClicked != addReminderButton && addReminderButton.dataset.selected == 'true') addReminderButton.dispatchEvent(new Event('click'));
     if (buttonClicked != editReminderButton && editReminderButton.dataset.selected == 'true') editReminderButton.dispatchEvent(new Event('click'));
     if (buttonClicked != removeReminderButton && removeReminderButton.dataset.selected == 'true') removeReminderButton.dispatchEvent(new Event('click'));
+    if (buttonClicked != addHomeworkButton && addHomeworkButton.dataset.selected == 'true') addHomeworkButton.dispatchEvent(new Event('click'));
+    if (buttonClicked != editHomeworkButton && editHomeworkButton.dataset.selected == 'true') editHomeworkButton.dispatchEvent(new Event('click'));
+    if (buttonClicked != removeHomeworkButton && removeHomeworkButton.dataset.selected == 'true') removeHomeworkButton.dispatchEvent(new Event('click'));
+    if (buttonClicked != addLinkButton && addLinkButton.dataset.selected == 'true') addLinkButton.dispatchEvent(new Event('click'));
+    if (buttonClicked != editLinkButton && editLinkButton.dataset.selected == 'true') editLinkButton.dispatchEvent(new Event('click'));
+    if (buttonClicked != removeLinkButton && removeLinkButton.dataset.selected == 'true') removeLinkButton.dispatchEvent(new Event('click'));
     changeVisibility();
 }
 
@@ -125,7 +139,7 @@ addHomeworkButton.addEventListener('click', () => {
         addHomeworkButton.dataset.selected = 'false';
         homeworkAdder.style.display = 'none';
         document.querySelector('#homework-adder #add-homework-content').dataset.invalidInput = 'false';
-        document.querySelector('#homework-adder div :first-Child').value = '';
+        document.querySelector('#homework-adder #add-homework-content').value = '';
         document.querySelector('#homework-adder div #subheading').checked = false;
     } else {
         addHomeworkButton.dataset.selected = 'true';
@@ -167,4 +181,56 @@ removeHomeworkButton.addEventListener('click', () => {
         for (const element of document.getElementsByClassName('homework')) {element.dataset.deleting = 'true'};
     }
     updateDraggable();
+})
+
+// link buttons
+
+addLinkButton.addEventListener('click', () => {
+    disableAllButtons(addLinkButton);
+    
+    const linkAdder = document.querySelector('#link-adder');
+    if (addLinkButton.dataset.selected == 'true') {
+        addLinkButton.dataset.selected = 'false';
+        linkAdder.style.display = 'none';
+        document.querySelector('#link-adder #add-link-title').dataset.invalidInput = 'false';
+        document.querySelector('#link-adder #add-link-title').value = '';
+        document.querySelector('#link-adder #add-link-url').value = '';
+    } else {
+        addLinkButton.dataset.selected = 'true';
+        linkAdder.style.display = 'grid';
+        document.querySelector('#add-link-title').focus();
+    }
+})
+
+editLinkButton.addEventListener('click', () => {
+    disableAllButtons(editLinkButton);
+    
+    if (editLinkButton.dataset.selected == 'true') {
+        editLinkButton.dataset.selected = 'false';
+        for (const element of document.getElementsByClassName('link')) {
+            element.draggable = 'false';
+        }
+        links = [];
+        for (const element of document.getElementsByClassName('link')) {
+            links.push({'title': element.innerHTML, 'url': element.href || ''});
+        }
+        saveLinks();
+    } else {
+        editLinkButton.dataset.selected = 'true';
+        for (const element of document.getElementsByClassName('link')) {
+            element.draggable = 'true';
+        }
+    }
+})
+
+removeLinkButton.addEventListener('click', () => {
+    disableAllButtons(removeLinkButton);
+    
+    if (removeLinkButton.dataset.selected == 'true') {
+        removeLinkButton.dataset.selected = 'false';
+        loadLinks()
+    } else {
+        removeLinkButton.dataset.selected = 'true';
+        for (const element of document.getElementsByClassName('link')) {element.dataset.deleting = 'true'};
+    }
 })

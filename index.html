@@ -9,6 +9,7 @@
         <script src="nav.js" defer></script>
         <script src="reminders.js" defer></script>
         <script src="homework.js" defer></script>
+        <script src="links.js" defer></script>
         <script src="drag-and-drop.js" defer></script>
         <script src="accent-color.js" defer></script>
     </head>
@@ -58,23 +59,39 @@
                 <div id="homework-container"></div>
             </section>
             <section id="links" class="page">
-                <h1>Links</h1>
-                <h2>School</h2>
-                <a href="https://nndsb.elearningontario.ca/d2l/home" target="_blank">LMS</a>
-                <a href="https://nndsb.edsby.com/p/BaseStudent/" target="_blank">Edsby</a>
-                <a href="https://www.nearnorthschools.ca/" target="_blank">NNDSB</a>
-                <a href="https://outlook.office.com/mail/" target="_blank">Mail</a>
-                <a href="https://mynndsb.nearnorthschools.ca/register/user/login" target="_blank">Sign in</a>
-                <h2>Translation</h2>
-                <a href="https://www.wordreference.com/" target="_blank">WordReference</a>
-                <a href="https://bonpatron.com/en/" target="_blank">BonPatron</a>
-                <a href="https://www.google.com/search?q=Google+Translate" target="_blank">Google Translate</a>
-                <h2>YouTube</h2>
-                <a href="https://music.youtube.com/playlist?list=LM" target="_blank">Music</a>
-                <a href="https://www.youtube.com/" target="_blank">YouTube</a>
-                <a href="https://en1.y2mate.is/q6rli/" target="_blank">Download</a>
-                <h2>Other</h2>
-                <a href="https://pixabay.com/" target="_blank">Pixabay</a>
+                <h1>
+                    Links
+                    <div id="link-controls">
+                        <button type="button" id="add-link">ADD</button>
+                        <button type="button" id="edit-link">MOVE</button>
+                        <button type="button" id="remove-link">REMOVE</button>
+                    </div>
+                </h1>
+                <div id="link-adder">
+                    <div>
+                        <input type="text" name="link-title" id="add-link-title" placeholder="Title..." autocomplete="off">
+                        <input type="text" name="link-url" id="add-link-url" placeholder="URL... (if needed)" autocomplete="off">
+                        <button type="button" id="add-link-confirm" onclick="addLink(this.parentNode.firstElementChild.value, this.parentNode.children[1].value)">Confirm</button>
+                    </div>
+                </div>
+                <div id="links-container">
+                    <h2 class="link">School</h2>
+                    <a class="link" href="https://nndsb.elearningontario.ca/d2l/home" target="_blank">LMS</a>
+                    <a class="link" href="https://nndsb.edsby.com/p/BaseStudent/" target="_blank">Edsby</a>
+                    <a class="link" href="https://www.nearnorthschools.ca/" target="_blank">NNDSB</a>
+                    <a class="link" href="https://outlook.office.com/mail/" target="_blank">Mail</a>
+                    <a class="link" href="https://mynndsb.nearnorthschools.ca/register/user/login" target="_blank">Sign in</a>
+                    <h2 class="link">Translation</h2>
+                    <a class="link" href="https://www.wordreference.com/" target="_blank">WordReference</a>
+                    <a class="link" href="https://bonpatron.com/en/" target="_blank">BonPatron</a>
+                    <a class="link" href="https://www.google.com/search?q=Google+Translate" target="_blank">Google Translate</a>
+                    <h2 class="link">YouTube</h2>
+                    <a class="link" href="https://music.youtube.com/playlist?list=LM" target="_blank">Music</a>
+                    <a class="link" href="https://www.youtube.com/" target="_blank">YouTube</a>
+                    <a class="link" href="https://en1.y2mate.is/q6rli/" target="_blank">Download</a>
+                    <h2 class="link">Other</h2>
+                    <a class="link" href="https://pixabay.com/" target="_blank">Pixabay</a>
+                </div>
             </section>
         </main>
         <input type="color" name="accent-color" id="accent-color">
