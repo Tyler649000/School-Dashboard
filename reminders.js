@@ -1,13 +1,13 @@
 let reminders = [];
 
 const days = [
-    'monday',
-    'tuesday',
     'wednesday',
     'thursday',
     'friday',
     'saturday',
-    'sunday'
+    'sunday',
+    'monday',
+    'tuesday'
 ]
 
 const addReminder = (date, content) => {
