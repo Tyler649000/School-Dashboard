@@ -373,18 +373,18 @@ main {
     background: linear-gradient(to bottom, #0000 25%, var(--clr-black));
 }
 
-.reminder:first-of-type:after {
+.reminder:first-of-type:before {
     content: "";
     position: absolute;
     inset: 0 100% 0 -0.2rem;
-    background: linear-gradient(to top, #0000 80%, var(--clr-black));
+    background: linear-gradient(to top, #0000 70%, var(--clr-black));
 }
 
 .reminder:last-of-type:after {
     content: "";
     position: absolute;
     inset: 0 100% 0 -0.2rem;
-    background: linear-gradient(to bottom, #0000 80%, var(--clr-black));
+    background: linear-gradient(to bottom, #0000 70%, var(--clr-black));
 }
 
 .link + h2.link {
