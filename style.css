@@ -364,3 +364,11 @@ main {
     background: none;
     border: none;
 }
+
+.homework:has(+ .subheading):after,
+.homework:last-of-type:not(.subheading):after {
+    content: "";
+    position: absolute;
+    inset: 0 100% 0 -0.2rem;
+    background: linear-gradient(to bottom, #0000 25%, var(--clr-black));
+}
