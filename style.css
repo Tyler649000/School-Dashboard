@@ -365,7 +365,7 @@ main {
     border: none;
 }
 
-.homework:has(+ .subheading):not.subheading):after,
+.homework:has(+ .subheading):not(.subheading):after,
 .homework:last-of-type:not(.subheading):after {
     content: "";
     position: absolute;
