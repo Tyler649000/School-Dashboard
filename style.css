@@ -365,10 +365,14 @@ main {
     border: none;
 }
 
-.homework:has(+ .subheading):after,
+.homework:has(+ .subheading):not.subheading):after,
 .homework:last-of-type:not(.subheading):after {
     content: "";
     position: absolute;
     inset: 0 100% 0 -0.2rem;
     background: linear-gradient(to bottom, #0000 25%, var(--clr-black));
+}
+
+.link + h2.link {
+    margin-top: 1rem !important;
 }
