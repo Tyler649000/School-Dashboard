@@ -31,9 +31,13 @@
                 </h1>
                 <div id="reminder-adder">
                     <div>
-                        <input type="text" name="reminder-date" id="add-reminder-date" placeholder="Date..." autocomplete="off">
+                        <div>
+                            <input type="text" name="reminder-date" id="add-reminder-date" placeholder="Date..." autocomplete="off">
+                            <button type="button" id="calendar" onclick="document.getElementById('add-reminder-invis-date').showPicker();"></button>
+                        </div>
+                        <input type="date" name="reminder-invis-date" id="add-reminder-invis-date" oninput="document.getElementById('add-reminder-date').value = new Date(this.value + 'T00:00').toDateString();">
                         <input type="text" name="reminder-content" id="add-reminder-content" placeholder="Reminder..." autocomplete="off">
-                        <button type="button" id="add-reminder-confirm" onclick="addReminder(this.parentNode.firstElementChild.value, this.parentNode.children[1].value)">Confirm</button>
+                        <button type="button" id="add-reminder-confirm" onclick="addReminder(document.getElementById('add-reminder-date').value, document.getElementById('add-reminder-content').value)">Confirm</button>
                     </div>
                 </div>
                 <div id="reminders-container"></div>
@@ -75,24 +79,7 @@
                         <button type="button" id="add-link-confirm" onclick="addLink(this.parentNode.firstElementChild.value, this.parentNode.children[1].value)">Confirm</button>
                     </div>
                 </div>
-                <div id="links-container">
-                    <h2 class="link">School</h2>
-                    <a class="link" href="https://nndsb.elearningontario.ca/d2l/home" target="_blank">LMS</a>
-                    <a class="link" href="https://nndsb.edsby.com/p/BaseStudent/" target="_blank">Edsby</a>
-                    <a class="link" href="https://www.nearnorthschools.ca/" target="_blank">NNDSB</a>
-                    <a class="link" href="https://outlook.office.com/mail/" target="_blank">Mail</a>
-                    <a class="link" href="https://mynndsb.nearnorthschools.ca/register/user/login" target="_blank">Sign in</a>
-                    <h2 class="link">Translation</h2>
-                    <a class="link" href="https://www.wordreference.com/" target="_blank">WordReference</a>
-                    <a class="link" href="https://bonpatron.com/en/" target="_blank">BonPatron</a>
-                    <a class="link" href="https://www.google.com/search?q=Google+Translate" target="_blank">Google Translate</a>
-                    <h2 class="link">YouTube</h2>
-                    <a class="link" href="https://music.youtube.com/playlist?list=LM" target="_blank">Music</a>
-                    <a class="link" href="https://www.youtube.com/" target="_blank">YouTube</a>
-                    <a class="link" href="https://en1.y2mate.is/q6rli/" target="_blank">Download</a>
-                    <h2 class="link">Other</h2>
-                    <a class="link" href="https://pixabay.com/" target="_blank">Pixabay</a>
-                </div>
+                <div id="links-container"></div>
             </section>
         </main>
         <input type="color" name="accent-color" id="accent-color">
