@@ -3,8 +3,7 @@
     --clr-white: #bbb;
     --clr-black: #1c1c1c;
 
-    --ff-primary: Roboto, sans-serif;
-    --ff-secondary: Futura, serif;
+    --ff-primary: "League Spartan", Futura, serif;
 }
 
 ::-webkit-scrollbar {display: none}
@@ -20,7 +19,7 @@ body {
     padding: 0;
     user-select: none;
     color: var(--clr-white);
-    font-family: var(--ff-secondary);
+    font-family: var(--ff-primary);
 }
 
 header {
@@ -56,8 +55,8 @@ main {
     position: relative;
 
     >h1 {
-        font-size: 2.5rem;
-        font-family: var(--ff-secondary);
+        font-size: 3rem;
+        font-family: var(--ff-primary);
         text-align: center;
     }
 
@@ -76,7 +75,7 @@ main {
     position: absolute;
     z-index: 1;
     width: 100%;
-    padding-bottom: 1.1rem;
+    padding-block: 1rem;
     background: linear-gradient(var(--clr-black), color-mix(in oklab, var(--clr-black) 80%, #0000) 80%, #0000);
     backdrop-filter: blur(0.05rem);
 }
@@ -90,13 +89,14 @@ main {
     margin-inline: 0.5rem;
     
     >button {
+        padding-block: 0.3rem 0.1rem;
         border: none;
         border-radius: 0.5em;
         background: #555f;
         color: var(--clr-primary);
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         cursor: pointer;
-        font-weight: bolder;
+        font-weight: 700;
         cursor: pointer;
         flex-grow: 1;
         transition: 200ms;
@@ -128,14 +128,14 @@ main {
 .reminder {
     >h1,
     >h1 span {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
         color: var(--clr-primary);
-        font-weight: bolder;
-        padding-block: 0.1rem;
+        font-weight: 700;
+        padding-block: 0.2rem;
     }
 
     >p {
-        font-family: var(--ff-secondary);
+        font-family: var(--ff-primary);
     }
 
     :first-child {
@@ -147,8 +147,8 @@ main {
 .reminder,
 .link {
     display: block;
-    font-size: 1.3rem;
-    padding: 0.3rem;
+    font-size: 1.75rem;
+    padding: 0.2rem;
     max-width: 100%;
     hyphens: auto;
     overflow-wrap: break-word;
@@ -198,7 +198,7 @@ main {
     .days-until-date {
         transform-origin: bottom;
         position: absolute;
-        inset: 0.3rem;
+        inset: 0.2rem;
         height: min-content;
         transform: scale(1, 0);
         transition: 250ms;
@@ -215,8 +215,9 @@ main {
 
     &.subheading {
         background: var(--clr-primary);
-        font-size: 0.9rem;
-        font-weight: bolder;
+        font-size: 1.1rem;
+        padding-block: 0.25rem;
+        font-weight: 900;
         box-shadow: none;
         border-radius: 0.5rem;
 
@@ -245,11 +246,11 @@ main {
     
     >h2 {
         margin-left: 0.4rem;
-        font-size: 1.7rem;
+        font-size: 2.25rem;
     }
 
     >a {
-        font-size: 1.3rem;
+        font-size: 1.75rem;
         color: var(--clr-primary);
         text-decoration: none;
         display: block;
@@ -311,6 +312,7 @@ main {
             padding: 0.2rem 0.5rem;
             border: 0.2rem solid var(--clr-white);
             border-radius: 0.5rem;
+            font-size: 1.25rem;
 
             &[data-invalid-input='true'] {
                 background: color-mix(in oklab, #f00 30%, #fff);
@@ -326,10 +328,10 @@ main {
         }
 
         #subheading {
-                width: 0.75rem;
+                width: 1rem;
 
             +label {
-                font-size: 0.75rem;
+                font-size: 1.25rem;
             }
         }
 
@@ -370,6 +372,7 @@ main {
             border: solid #0005 0.2em;
             cursor: pointer;
             transition: 100ms;
+            font-size: 1rem;
 
             &:hover {
                 background: #0f0;
@@ -382,7 +385,7 @@ main {
 #homework-container,
 #links-container {
     overflow-y: scroll;
-    padding-top: 6rem;
+    padding-top: 6.35rem;
 }
 
 #accent-color {
