@@ -216,7 +216,7 @@ main {
     &.subheading {
         background: var(--clr-primary);
         font-size: 1.1rem;
-        padding-block: 0.25rem;
+        padding-block: 0.4rem 0.2rem;
         font-weight: 900;
         box-shadow: none;
         border-radius: 0.5rem;
