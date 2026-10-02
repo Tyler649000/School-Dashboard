@@ -245,8 +245,6 @@ main {
 }
 
 #links-container {
-    padding-top: 6.5rem;
-    
     :first-child {
         padding-top: 0;
     }
@@ -393,6 +391,10 @@ main {
 #links-container {
     overflow-y: scroll;
     padding-top: 6.35rem;
+}
+
+#links-container {
+    padding-top: 6.5rem;
 }
 
 #accent-color {
